@@ -1,6 +1,6 @@
 'use strict';
 
-var RSS = require('../models/rss');
+var Feed = require('../models/rss');
 //var mongoosePaginate = require('mongoose-pagination')
 var mongoosePaginate = require('mongoose-paginate');
 var path = require('path');
@@ -13,31 +13,31 @@ function home(req, res, next) {
     })
     next();
 }
-function getRss(req, res, next) {
+function getFeed(req, res, next) {
     
     res.status(200).send({
-        message: "getRss OK"
+        message: "getFeed OK"
     })
     next();
 }
-function saveRss(req, res, next) {
+function saveFeed(req, res, next) {
     res.status(200).send({
-        message: "saveRss OK"
+        message: "saveFeed OK"
     })
 }
-function getRssList(req, res, next) {
+function getFeedList(req, res, next) {
     res.status(200).send({
-        message: "getRssList OK"
+        message: "getFeedList OK"
     })
 }
-function updateRss(req, res, next) {
+function updateFeed(req, res, next) {
     res.status(200).send({
-        message: "updateRss OK"
+        message: "updateFeed OK"
     })
 }
-function deleteRss(req, res, next) {
+function deleteFeed(req, res, next) {
     res.status(200).send({
-        message: "deleteRss OK"
+        message: "deleteFeed OK"
     })
 }
 function uploadImage(req, res, next) {
@@ -48,4 +48,4 @@ function uploadImage(req, res, next) {
 
 
 module.exports={
-    home,getRss,saveRss,getRssList,updateRss,deleteRss,uploadImage};
+    home,getFeed,saveFeed,getFeedList,updateFeed,deleteFeed,uploadImage};
