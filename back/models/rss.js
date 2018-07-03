@@ -3,7 +3,7 @@
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema;
 
-var rssSchema =  Schema({
+var feedSchema =  Schema({
     title: String,
     body: String,
     image: String,
@@ -13,4 +13,4 @@ var rssSchema =  Schema({
 })
 
 
-module.exports = mongoose.model('RSS', rssSchema)
+module.exports = mongoose.model('FEED', feedSchema)
