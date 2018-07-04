@@ -24,13 +24,13 @@ export class ApiServeService {
 
   getFeeds(){
     //return this.http.get(this.rssToJsonServiceBaseUrl + 'https://elpais.com')
-    let response = this._Restangular.all('/home');
-    
-    return response.getList().toPromise().then((feeds)=>{
+    let response = this._Restangular.all('feeds').get('1');
+   
+    return response.toPromise().then((feeds)=>{
       
-      console.log('feeds'+feeds.toString())
+      console.log('feeds'+feeds.feeds)
       return feeds;
-    })
+    });
   }
 
   getHeaders(){ return this.headers}

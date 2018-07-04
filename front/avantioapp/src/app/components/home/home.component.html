@@ -13,12 +13,18 @@
 <div *ngIf="data" class="row col-lg-12">
   <div class="col-lg-3">
     <ul class="nav nav-tabs">Feeds</ul>
+    <ul class="nav nav-tabs">
+      <button class="btn btn-info"(click)="first"><<</button>
+      <button class="btn btn-info"(click)="previous"><</button>
+      <button class="btn btn-info"(click)="next">></button>
+      <button class="btn btn-info"(click)="last">>></button>
+      <span style="float:right" >Page: 5</span></ul>
     <table class="table table-bordered">
       <tr *ngFor="let row of data; let i = index">
         <td (click)=selectItem(row)>
           <span>{{i}} </span>
           <span *ngIf="row.publisher==publisher.elmundo"><img width="30" height="30" src="../assets/elmundo.png" alt=""></span>
-          <span *ngIf="row.publisher==publisher.elpais"><img width="30" height="30" src="elpais.png" alt=""></span>
+          <span *ngIf="row.publisher==publisher.elpais"><img width="30" height="30" src="../assets/elpais.png" alt=""></span>
           <span> #{{row.title}}</span>
         </td>
         <!-- <td *ngFor="let val of row">
