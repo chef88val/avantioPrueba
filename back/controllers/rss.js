@@ -5,13 +5,37 @@ var Feed = require('../models/rss');
 var mongoosePaginate = require('mongoose-paginate');
 var path = require('path');
 var fs = require('fs');
+let Parser = require('rss-parser');
+let parser = new Parser();
+let rssToJsonServiceBaseUrl = 'https://rss2json.com/api.json?rss_url=';
 
 function home(req, res, next) {
-    
-    res.status(200).send({
-        message: "home OK"
-    })
+    console.log('home')
+    //let url = req.param.url==='elPais'?'https://elpais.com':'https://elmundo.com';
+    //(async () => {
+    let feed = mockDATA(); //await parser.parseURL(rssToJsonServiceBaseUrl.concat(url));
+    console.log('feed' + feed[0].toString());
+    return res.status(200).send(feed);
     next();
+    if (feed.length > 0)
+        feed.forEach(item => {
+            console.log(item.title + ':' + item.link)
+            let feed = new Feed();
+            feed.title = item.title;
+            feed.idExternal = item.id;
+            feed.pubDate = item.pubDate;
+            feed.publisher = item.author;
+            feed.body = item.content;
+            feed.source = item.link;
+            Feed.updateMany({
+                title: item.title
+            }, feed, {
+                upsert: true
+            }, (err, suc) => {
+                if (err) console.log('Err' + err);
+                else console.log(suc);
+            });
+        });
 }
 
 function getFeed(req, res, next) {
