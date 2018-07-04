@@ -2,7 +2,7 @@
 process.env.NODE_ENV = 'test';
 
 let mongoose = require("mongoose");
-let Rss = require('../models/rss');
+let Feed = require('../models/rss');
 
 //Require the dev-dependencies
 let chai = require('chai');
@@ -15,10 +15,10 @@ let should = chai.should();
 chai.use(chaiHttp);
 describe ('Model.RSS', ()=>{
     it('Exist',(done)=>{
-        let el = new Rss({title:'aaa'});
+        let el = new Feed({title:'aaa'});
         console.log(el);
-        el.validate(((err,rss)=>{
-            console.log(rss+"err"+err)
+        el.validate(((err,feed)=>{
+            console.log(feed+"err"+err)
             //expect(err.errors.title).to.exist;
             done();
         }));
