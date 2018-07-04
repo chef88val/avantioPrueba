@@ -70,10 +70,11 @@ function home(publisher) {
     })();
 }
 app.use('/api', routes)
+ 
 _.forEach(constPublisher,(publisher)=>{
     console.log('Publisher'+publisher.toString());
     home(publisher);    
-})
+}) 
 module.exports = app;
 
 
@@ -90,5 +91,4 @@ global.fnPagination = (page) => {
     }
     var itemsPage = 50;
     return itemsPage * page
-}
-
+} 
