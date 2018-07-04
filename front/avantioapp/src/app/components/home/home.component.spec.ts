@@ -1,6 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { inject, async , ComponentFixture, TestBed } from '@angular/core/testing';
+import {   RouterTestingModule } from "@angular/router/testing";
 import { HomeComponent } from './home.component';
+import { CardComponent } from '../card/card.component';
+import { RestangularModule, Restangular, RestangularHttp } from 'ngx-restangular';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -8,7 +10,9 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ]
+      declarations: [ HomeComponent,CardComponent ],
+      imports: [ RouterTestingModule,RestangularModule ],
+      providers: [ Restangular]
     })
     .compileComponents();
   }));
@@ -19,7 +23,7 @@ describe('HomeComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create', inject([ Restangular], ( _RestangularHttp:Restangular ) => {
     expect(component).toBeTruthy();
-  });
+  }));
 });

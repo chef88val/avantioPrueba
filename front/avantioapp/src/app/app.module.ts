@@ -26,6 +26,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 import { RestangularModule, Restangular } from 'ngx-restangular';
+import { RouterOutlet, RouterModule } from '@angular/router';
 
 // Function for setting the default restangular configuration
 export function RestangularConfigFactory (RestangularProvider) {
@@ -57,7 +58,7 @@ export function RestangularConfigFactory (RestangularProvider) {
     
     RestangularModule.forRoot(RestangularConfigFactory)
   ],
-  providers: [ApiServeService],
+  providers: [ApiServeService,RouterOutlet,HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
