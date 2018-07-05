@@ -1,12 +1,22 @@
-
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" >DailyTrends</a>
+      <a class="navbar-brand">DailyTrends</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a>Refresh</a></li>
+      <li class="active">
+        <a href="#">Home</a>
+      </li>
+      <li>
+        <a>Refresh</a>
+      </li>
+      <li>
+          <a>
+            <button (click)="newFeed()">
+              <i class="fa fa-plus"></i>
+            </button>
+          </a>
+        </li>
     </ul>
   </div>
 </nav>
@@ -14,18 +24,24 @@
   <div class="col-lg-3">
     <ul class="nav nav-tabs">Feeds</ul>
     <ul class="nav nav-tabs">
-      <button class="btn btn-info"(click)="first"><<</button>
-      <button class="btn btn-info"(click)="previous"><</button>
-      <button class="btn btn-info"(click)="next">></button>
-      <button class="btn btn-info"(click)="last">>></button>
-      <span style="float:right" >Page: 5</span></ul>
+        <button disabled="fals" *ng class="btn btn-info" (click)="first()"><<</button>
+        <button class="btn btn-info" (click)="previous()"><</button>
+        <button class="btn btn-info" (click)="next()">></button>
+        <button class="btn btn-info" (click)="last()">>></button>
+      </ul>
     <table class="table table-bordered">
       <tr *ngFor="let row of data; let i = index">
         <td (click)=selectItem(row)>
           <span>{{i}} </span>
-          <span *ngIf="row.publisher==publisher.elmundo"><img width="30" height="30" src="../assets/elmundo.png" alt=""></span>
-          <span *ngIf="row.publisher==publisher.elpais"><img width="30" height="30" src="../assets/elpais.png" alt=""></span>
+          <span *ngIf="row.publisher==publisher.elmundo">
+            <img width="30" height="30" src="../assets/elmundo.png" alt="">
+          </span>
+          <span *ngIf="row.publisher==publisher.elpais">
+            <img width="30" height="30" src="../assets/elpais.png" alt="">
+          </span>
           <span> #{{row.title}}</span>
+          <button class="btn btn-info" (click)="editFeed(row)"><i class="fa fa-minus"></i></button>
+          <button class="btn btn-info" (click)="deleteFeed(row)"><i class="fa fa-cross"></i></button>
         </td>
         <!-- <td *ngFor="let val of row">
                   {{val[0]}}
@@ -34,6 +50,6 @@
     </table>
   </div>
   <div class="col-lg-9">
-      <app-card [item]="itemSelected"></app-card>
-    </div>
+    <app-card [item]="itemSelected"></app-card>
+  </div>
 </div>

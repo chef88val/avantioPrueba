@@ -4,9 +4,10 @@ import '../polyfills';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { HttpClientModule, HttpClient } from '@angular/common/http'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Http, Response } from '@angular/http';
+import { ModalDialogModule } from "ngx-modal-dialog";
 // NG Translate
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -20,15 +21,16 @@ import { CardComponent } from './components/card/card.component';
 import { KeysPipe } from './pipes/keys.pipe';
 import { ValueHeadersPipe } from './pipes/value-headers.pipe';
 
-import {ApiServeService} from './services/api-serve.service';
+import { ApiServeService } from './services/api-serve.service';
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 import { RestangularModule, Restangular } from 'ngx-restangular';
+import { RouterOutlet, RouterModule } from '@angular/router';
 
 // Function for setting the default restangular configuration
-export function RestangularConfigFactory (RestangularProvider) {
+export function RestangularConfigFactory(RestangularProvider) {
   RestangularProvider.setBaseUrl('http://127.0.0.1:3800/api/');
   //RestangularProvider.setDefaultHeaders({'Authorization': 'Bearer UDXPx-Xko0w4BRKajozCVy20X11MRZs1'});
 }
@@ -47,6 +49,7 @@ export function RestangularConfigFactory (RestangularProvider) {
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
+    ModalDialogModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -54,10 +57,10 @@ export function RestangularConfigFactory (RestangularProvider) {
         deps: [HttpClient]
       }
     }),
-    
+
     RestangularModule.forRoot(RestangularConfigFactory)
   ],
-  providers: [ApiServeService],
+  providers: [ApiServeService, RouterOutlet, HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
