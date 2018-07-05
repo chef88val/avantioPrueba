@@ -1,4 +1,4 @@
 export enum Publisher {
-    elPais=0,
-    elMundo=1
+    elPais = 0,
+    elMundo = 1
 }

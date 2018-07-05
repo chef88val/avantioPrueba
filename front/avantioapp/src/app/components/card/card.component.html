@@ -1,30 +1,25 @@
-<div class="row col-lg-12">
-  <div>{{item.title}}</div>
+<div *ngIf="!isItem" class="row col-lg-12">
+  <h1>Selecciona una noticia</h1>
+  <!--<div>{{item.title}}</div>
   <div>{{item.publisher}}</div>
-  <div [innerHTML]="item.content"></div>
+  <div [innerHTML]="item.body"></div>
   <div>{{item.source}}</div>
   <div>{{item.author}}</div>
-  <div>{{item.pubDate}}</div>
-    <!--<div *ngIf="(item | json) != '{}'" class="panel panel-default">
-        <div class="panel-heading">
-          <div class="row">
-          <div class="col-lg-7"> <span class="text-left" style="float:left">{{item.last_name}}, {{item.name}}</span></div>
-          <div class="col-lg-5"> <span class="text-right" style="float:right"><b><i>{{item.ft_status}}</i></b></span></div>
-        </div>
-        </div>
-        <div class="panel-body">
-          <div class="row">
-            <div *ngFor="let key of item | keys" class="col-lg-6" style="    margin-bottom: 20px;">
-              
-              <div class="col-lg-4">{{key | valueHeaders}}:</div>
-              
-              <div class="col-lg-7">{{item[key]}}</div>
-              
-            </div>
-          </div>
-        </div>
-      </div>
-      <div *ngIf="(item| json) == '{}'">
-        <h1 class="text-danger"> NO DATA/ NO ITEM SELECTED</h1>
-      </div>-->
+  <div>{{item.pubDate}}</div>-->
+</div>
+
+<div *ngIf="isItem" class="row col-lg-10 offset-md-1">
+  <div class="card" style="    margin-top: 25px;">
+    <span *ngIf="item.publisher==publisher.elmundo">
+      <img width="30" height="30" src="../assets/elmundo.png" alt="">
+    </span>
+    <span *ngIf="item.publisher==publisher.elpais">
+      <img width="30" height="30" src="../assets/elpais.png" alt="">
+    </span>
+    <div class="card-body">
+      <h5 class="card-title">{{item.publisher}}Card title</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
 </div>

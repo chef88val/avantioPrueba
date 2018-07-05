@@ -4,9 +4,9 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'keys'
 })
 export class KeysPipe implements PipeTransform {
- 
-  transform(value) : any {
-    if(!value) {
+
+  transform(value): any {
+    if (!value) {
       return null;
     }
     console.log(Object.keys(value))

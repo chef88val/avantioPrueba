@@ -4,9 +4,11 @@ import '../polyfills';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { HttpClientModule, HttpClient } from '@angular/common/http'; 
-import { Http, Response } from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+
+import { ModalModule } from 'ngx-modialog';
+import { BootstrapModalModule } from 'ngx-modialog/plugins/bootstrap';
 // NG Translate
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -16,19 +18,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { CardComponent } from './components/card/card.component';
+import { MyComponent } from './components/my-component/my-component.component';
 
 import { KeysPipe } from './pipes/keys.pipe';
 import { ValueHeadersPipe } from './pipes/value-headers.pipe';
 
-import {ApiServeService} from './services/api-serve.service';
+import { ApiServeService } from './services/api-serve.service';
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 import { RestangularModule, Restangular } from 'ngx-restangular';
-
+import { RouterOutlet, RouterModule } from '@angular/router';
+import { FeedComponent } from './components/feed/feed.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 // Function for setting the default restangular configuration
-export function RestangularConfigFactory (RestangularProvider) {
+export function RestangularConfigFactory(RestangularProvider) {
   RestangularProvider.setBaseUrl('http://127.0.0.1:3800/api/');
   //RestangularProvider.setDefaultHeaders({'Authorization': 'Bearer UDXPx-Xko0w4BRKajozCVy20X11MRZs1'});
 }
@@ -37,8 +42,11 @@ export function RestangularConfigFactory (RestangularProvider) {
     AppComponent,
     HomeComponent,
     CardComponent,
+    MyComponent,
     KeysPipe,
-    ValueHeadersPipe
+    ValueHeadersPipe,
+    FeedComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -54,10 +62,12 @@ export function RestangularConfigFactory (RestangularProvider) {
         deps: [HttpClient]
       }
     }),
-    
+    ModalModule.forRoot(),
+    BootstrapModalModule,
+
     RestangularModule.forRoot(RestangularConfigFactory)
   ],
-  providers: [ApiServeService],
+  providers: [ApiServeService, RouterOutlet, HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
