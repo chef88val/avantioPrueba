@@ -10,7 +10,7 @@ var middle= require('../middlewares/auth')
 var multipart =  require('connect-multiparty')
 var md_upload = multipart({uploadDir: './uploads/feeds'})
 
-//api.get('/home', feedController.home);
+api.get('/publishers', feedController.getPublishersList);
 api.post('/feed', feedController.saveFeed)
 api.get('/feed/:id',middle.ensureAuth, feedController.getFeed)
 api.get('/feeds/:page?',middle.ensureAuth, feedController.getFeedList)

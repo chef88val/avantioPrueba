@@ -9,6 +9,13 @@ let Parser = require('rss-parser');
 let parser = new Parser();
 let rssToJsonServiceBaseUrl = 'https://rss2json.com/api.json?rss_url=';
 
+function getPublishersList(req, res, next){
+    res.status(200).send({
+        elpais: 'elPais',
+        elmundo: 'elMundo'
+      })
+}
+
 function getFeed(req, res, next) {
     var feedId = req.params.id;
 
@@ -172,7 +179,7 @@ function mockDATA() {
 }
 
 module.exports = {
-    
+    getPublishersList,
     getFeed,
     saveFeed,
     getFeedList,
