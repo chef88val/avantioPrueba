@@ -9,29 +9,29 @@ let Parser = require('rss-parser');
 let parser = new Parser();
 let rssToJsonServiceBaseUrl = 'https://rss2json.com/api.json?rss_url=';
 
-function getPublishersList(req, res, next){
+function getPublishersList(req, res, next) {
     res.status(200).send({
         elpais: 'elPais',
         elmundo: 'elMundo'
-      })
+    })
 }
 
 function getFeed(req, res, next) {
     var feedId = req.params.id;
-
-    feed.findById(feedId, (err, feed) => {
+console.log(feedId)
+    Feed.findById(feedId, (err, feed) => {
+        console.log(feed)
         if (err) return res.status(500).send({
             message: 'Error en la peticion'
         })
         if (!feed) return res.status(404).send({
             message: 'El feed no existe'
         })
-        return res.status(200).send({
+        return res.status(200).send(
             feed
-        })
+        )
     })
-
-    next();
+ 
 }
 
 function saveFeed(req, res, next) {
@@ -41,34 +41,39 @@ function saveFeed(req, res, next) {
     })
 }
 var mongoosePaginate = require('mongoose-paginate');
+
 function getFeedList(req, res, next) {
     var feed = new Feed();
     if (req.params.page)
         //var page = global.fnPagination(req.params.page);
         var page = req.params.page;
     var itemspage = 50;
-    var totalItems=0;
+    var totalItems = 0;
     //else page=0;
     //let feed = parser.parseURL('https://www.reddit.com/.rss');
     //Feed.find().sort('_id').skip(page).limit(itemspage).exec(
     //Feed.find().sort('_id').skip(page).limit(itemspage).exec(
-        //Feed.paginate({}, { page: 3, limit: 10 },
-        Feed.count().exec((err, total)=>{totalItems= total})
-    Feed.find({},{}, { skip: itemspage*(page-1), limit: 100 },
+    //Feed.paginate({}, { page: 3, limit: 10 },
+    Feed.count().exec((err, total) => {
+        totalItems = total
+    })
+    Feed.find({}, {}, {
+            skip: itemspage * (page - 1),
+            limit: 100
+        },
         (err, feeds, total) => {
-            console.log(total, "feeds")
             if (err) return res.status(500).send({
                 message: 'Error en la peticion'
             })
             if (!feeds) return res.status(404).send({
                 message: 'No hay feeds disponibles'
             })
-            if(Math.ceil(totalItems / itemspage)<page)
-            return res.status(404).send({
-                message: 'No hay más paginas disponibles'
-            })
+            if (Math.ceil(totalItems / itemspage) < page)
+                return res.status(404).send({
+                    message: 'No hay más paginas disponibles'
+                })
             return res.status(200).send({
-                itemspage:page==1?itemspage:totalItems-(itemspage),
+                itemspage: page == 1 ? itemspage : totalItems - (itemspage),
                 totalItems,
                 pages: Math.ceil(totalItems / itemspage),
                 feeds
@@ -82,7 +87,8 @@ function getFeedList(req, res, next) {
 function updateFeed(req, res, next) {
     var feedId = req.params.id;
     var update = req.body;
-    Feed.findByIdAndUpdate(id, update, {
+    console.log('updateFeed')
+    Feed.findByIdAndUpdate(feedId, update, {
         new: true
     }, (err, _feed) => {
         if (err) return res.status(500).send({
@@ -100,7 +106,7 @@ function updateFeed(req, res, next) {
 function deleteFeed(req, res, next) {
     var feedId = req.params.id;
     var update = req.body;
-    Feed.findByIdAndRemove(id, (err, _feed) => {
+    Feed.findByIdAndRemove(feedId, (err, _feed) => {
         if (err) return res.status(500).send({
             message: 'Error en la peticion'
         })
