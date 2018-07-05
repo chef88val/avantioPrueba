@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { RestangularModule, Restangular } from 'ngx-restangular';
+import { puts } from 'util';
+
 
 @Injectable({
   providedIn: 'root'
@@ -24,22 +26,36 @@ export class ApiServeService {
 
   getFeeds(page?: Number) {
     if (page == null) page = 1
-    //return this.http.get(this.rssToJsonServiceBaseUrl + 'https://elpais.com')
-    let response = this._Restangular.all('feeds').get(page);
 
-    return response.getList().toPromise().then((feeds) => {
+    //return this.http.get(this.rssToJsonServiceBaseUrl + 'https://elpais.com')
+    let response = this._Restangular.one('feeds', page).get();
+
+    return response.toPromise().then((feeds) => {
 
       console.log('feeds' + feeds.toString())
       return feeds;
     })
   }
-  getPublisherList(){
-    let response = this._Restangular.get('publishers');
 
-    return response.getList().toPromise().then((publisher) => {
+  getFeed(id: String) {
 
-      //console.log('feeds' + feeds.toString())
-      this.publishers=publisher;
+
+    //return this.http.get(this.rssToJsonServiceBaseUrl + 'https://elpais.com')
+    let response = this._Restangular.one('feed', id).get();
+
+    return response.toPromise().then((feed) => {
+
+      console.log(feed)
+      return feed;
+    })
+  }
+  getPublisherList() {
+    let response = this._Restangular.one('publishers').get();
+
+    return response.toPromise().then((publisher) => {
+
+      console.log('publisher' + publisher)
+      this.publishers = publisher;
     })
   }
 
@@ -47,14 +63,20 @@ export class ApiServeService {
   getPublishers() { return this.publishers }
 
   updateFeed(row) {
-    this._Restangular.put('feed').one(row.id).toPromise().then((err, success) => {
-
+    let response = this._Restangular.one('feed', row._id).customPUT(JSON.stringify(row), null, null, { 'Content-Type': undefined })
+    return response.toPromise().then((err, success) => {
+      return err;
+      /*if(err) return {status:false, value:err};
+      else return {status:true, value:success};*/
     });
   }
 
   deleteFeed(row) {
-    this._Restangular.remove('feed').one(row.id).toPromise().then((err, success) => {
-
+    let response = this._Restangular.one('feed', row._id).remove()
+    return response.toPromise().then((err, success) => {
+      return err;
+      /*if(err) return {status:false, value:err};
+      else return {status:true, value:success};*/
     });
   }
 }

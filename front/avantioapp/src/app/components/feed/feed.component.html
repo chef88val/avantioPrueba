@@ -1,0 +1,62 @@
+<!--<div class="row col-lg-12">
+  <div>{{feed.title}}</div>
+  <div>{{feed.publisher}}</div>
+  <div [innerHTML]="feed.content"></div>
+  <div>{{feed.source}}</div>
+  <div>{{feed.author}}</div>
+  <div>{{feed.pubDate}}</div>-->
+<app-navbar></app-navbar>
+<div class="container">
+  <h1>Edit Feed</h1>
+  <form (ngSubmit)="onSubmit()" #feedForm="ngForm">
+    <div class="form-group">
+      <label for="name">Title</label>
+      <input type="text" class="form-control" id="title" required [(ngModel)]="feed.title" name="title">
+      <!--<div [hidden]="feed.title.valid || feed.title.pristine" class="alert alert-danger">
+        Title is required
+      </div>-->
+    </div>
+
+    <div class="form-group">
+      <label for="name">Publisher</label>
+      <input type="text" class="form-control" id="publisher" required [(ngModel)]="feed.publisher" name="publisher">
+      <!--<div [hidden]="feed.publisher.valid || feed.publisher.pristine" class="alert alert-danger">
+        Publisher is required
+      </div>-->
+    </div>
+
+    <div class="form-group">
+      <label for="name">Content</label>
+      <!--<textarea placeholder="Mensaje" class="form-control" #msn maxlength="300" [(ngModel)]="feed.content" name="Msn" cols="25"></textarea>-->
+      <input type="text" class="form-control" id="content" required [(ngModel)]="feed.body" name="content">
+      <!--<div [hidden]="feed.content.valid || feed.content.pristine" class="alert alert-danger">
+          Content is required
+        </div>-->
+    </div>
+
+    <div class="form-group">
+      <label for="name">Author</label>
+      <input type="text" class="form-control" id="author" required [(ngModel)]="feed.author" name="author">
+      <!--<div [hidden]="feed.author.valid || feed.author.pristine" class="alert alert-danger">
+            Author is required
+          </div>-->
+    </div>
+
+    <div class="form-group">
+      <label for="name">Source</label>
+      <input type="text" class="form-control" id="source" required [(ngModel)]="feed.source" name="source">
+      <!--<div [hidden]="feed.source.valid || feed.source.pristine" class="alert alert-danger">
+        Source is required
+      </div>-->
+    </div>
+
+    <!--<button [disabled]="!feedForm.form.valid" type="submit" class="btn btn-success">Save</button>-->
+    <button class="btn btn-info" (click)="editFeed(feed)">
+      <i class="fa fa-edit fa-2x"></i>
+    </button>
+    <button class="btn btn-danger" (click)="deleteFeed(feed)">
+      <i class="fa fa-plus fa-2x"></i>
+    </button>
+
+  </form>
+</div>

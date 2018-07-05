@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
+import { ApiServeService } from '../../services/api-serve.service';
 
 @Component({
   selector: 'app-card',
@@ -7,10 +8,14 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, SimpleChange } from
 })
 export class CardComponent implements OnInit, OnChanges {
   @Input() item = 0;
-  constructor() { }
+  private publisher: any = [];
+  private isItem: Boolean = false;
+  constructor(private _api: ApiServeService) { }
 
   ngOnInit() {
-    console.log("CARD", this.item)
+    this.publisher = this._api.getPublishers();
+    if (Object(this.item).keys != undefined) this.isItem = true;
+    console.log("CARD", this.item, Object(this.item).keys == undefined)
   }
 
   ngOnChanges(changes: SimpleChanges): void {
