@@ -30,7 +30,7 @@ function getFeed(req, res, next) {
 
         
         return res.status(200).send(
-            feed
+            feed[0]
         )
     })
  
@@ -89,6 +89,7 @@ function getFeedList(req, res, next) {
 function updateFeed(req, res, next) {
     var feedId = req.params.id;
     var update = req.body;
+    update.visible= true;
     console.log('updateFeed')
     Feed.findByIdAndUpdate(feedId, update, {
         new: true
