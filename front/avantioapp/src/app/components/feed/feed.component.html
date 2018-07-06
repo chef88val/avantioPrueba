@@ -51,14 +51,14 @@
     </div>
 
     <!--<button [disabled]="!feedForm.form.valid" type="submit" class="btn btn-success">Save</button>-->
-    <button *ngIf="!isNew"class="btn btn-block btn-info" (click)="editFeed(feed)">
-        SAVE
+    <button *ngIf="!isNew" class="btn btn-block btn-info" (click)="editFeed(feed)">
+      SAVE
     </button>
-    <button *ngIf="!isNew"class="btn btn-block btn-danger" (click)="deleteFeed(feed)">
+    <button *ngIf="!isNew" class="btn btn-block btn-danger" (click)="deleteFeed(feed)">
       DELETE
     </button>
 
-    <button *ngIf="isNew"class="btn btn-block btn-success" (click)="newFeed(feed)">
+    <button *ngIf="isNew" class="btn btn-block btn-success" (click)="newFeed(feed)">
       NEW
     </button>
 

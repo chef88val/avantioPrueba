@@ -21,7 +21,7 @@ export class CardComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes.item)
-    if(_.findKey( changes.item,'_id'))this.isItem = true;
+    if (_.findKey(changes.item, '_id')) this.isItem = true;
     //throw new Error("Method not implemented.");
   }
 

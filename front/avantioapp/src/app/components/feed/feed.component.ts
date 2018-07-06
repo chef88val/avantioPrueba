@@ -17,10 +17,11 @@ export class FeedComponent implements OnInit {
     this.route.params.subscribe(params => {
       // (+) converts string 'id' to a number
       console.log(params);
-      if(params.row!='new'){this.id = params.row;
-      // In a real app: dispatch action to load the details here.
-      console.log(this._api.getFeed(params.row).then((params) => { this.setFeed(params); console.log(params) }));
-      }else this.isNew= true;
+      if (params.row != 'new') {
+      this.id = params.row;
+        // In a real app: dispatch action to load the details here.
+        console.log(this._api.getFeed(params.row).then((params) => { this.setFeed(params); console.log(params) }));
+      } else this.isNew = true;
     });
     //this._api.getFeed(this.id).then((params)=>{console.log(params);return params}) 
   }

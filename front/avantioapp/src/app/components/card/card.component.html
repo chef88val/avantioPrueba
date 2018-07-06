@@ -17,17 +17,20 @@
       <img width="30" height="30" src="../assets/elpais.png" alt="">
     </span>
     <div class="card-body">
-      <span><i>{{item.pubDate | date}}</i></span>
+      <span>
+        <i>{{item.pubDate | date}}</i>
+      </span>
       <h2 class="card-title">{{item.title}} </h2>
       <p class="card-text" [innerHTML]="item.body"></p>
-      <p class="card-subtitle mb-2 text-muted"><b>  Author:</b>{{item.author}}</p>
+      <p class="card-subtitle mb-2 text-muted">
+        <b> Author:</b>{{item.author}}</p>
       <a href="" [href]="item.source" class="btn btn-primary">
         <span *ngIf="item.publisher==publisher.elmundo">
           <img width="30" height="30" src="../assets/elmundo.png" alt="">
         </span>
         <span *ngIf="item.publisher==publisher.elpais">
           <img width="30" height="30" src="../assets/elpais.png" alt="">
-        </span>  Go Feed</a>
+        </span> Go Feed</a>
     </div>
   </div>
 </div>
