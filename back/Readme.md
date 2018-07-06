@@ -1,6 +1,5 @@
 # AvantioApp - Dailytrends
-
-[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
+ 
 
 Se ha creado este repositorio para la prueba técnica en la empresa Avantio.
 
