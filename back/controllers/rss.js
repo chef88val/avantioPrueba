@@ -18,17 +18,19 @@ function getPublishersList(req, res, next) {
 
 function getFeed(req, res, next) {
     var feedId = req.params.id;
-console.log(feedId)
-    Feed.findById(feedId, (err, feed) => {
-        console.log(feed)
+    console.log(feedId)
+    Feed.find({_id:feedId, visible:true}, (err, feed) => {
+        console.log(err,feed)
         if (err) return res.status(500).send({
             message: 'Error en la peticion'
         })
-        if (!feed) return res.status(404).send({
+        if (!feed || feed.length<1) return res.status(404).send({
             message: 'El feed no existe'
         })
+
+        
         return res.status(200).send(
-            feed
+            feed[0]
         )
     })
  
@@ -57,7 +59,7 @@ function getFeedList(req, res, next) {
     Feed.count().exec((err, total) => {
         totalItems = total
     })
-    Feed.find({}, {}, {
+    Feed.find({visible: true}, {}, {
             skip: itemspage * (page - 1),
             limit: 100
         },
@@ -87,6 +89,7 @@ function getFeedList(req, res, next) {
 function updateFeed(req, res, next) {
     var feedId = req.params.id;
     var update = req.body;
+    update.visible= true;
     console.log('updateFeed')
     Feed.findByIdAndUpdate(feedId, update, {
         new: true
@@ -106,7 +109,7 @@ function updateFeed(req, res, next) {
 function deleteFeed(req, res, next) {
     var feedId = req.params.id;
     var update = req.body;
-    Feed.findByIdAndRemove(feedId, (err, _feed) => {
+    Feed.findByIdAndUpdate(feedId,{visible: false}, (err, _feed) => {
         if (err) return res.status(500).send({
             message: 'Error en la peticion'
         })

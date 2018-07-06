@@ -73,7 +73,7 @@
     </div>
     <table class="table table-bordered">
       <tr *ngFor="let row of data; let i = index">
-        <td (click)=selectItem(row)>
+        <td>
           <!--<a [routerLink]="['/feed', row._id]">-->
           <span>{{i}} </span>
           <button class="btn btn-success" (click)="selectItem(row)">

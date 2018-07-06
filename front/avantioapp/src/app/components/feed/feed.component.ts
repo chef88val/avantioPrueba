@@ -11,14 +11,16 @@ export class FeedComponent implements OnInit {
 
   private feed: any = {};
   private id: String;
+  private isNew: Boolean = false;
   constructor(private route: ActivatedRoute, private _route: Router, private _api: ApiServeService) { }
   ngOnInit() {
     this.route.params.subscribe(params => {
       // (+) converts string 'id' to a number
       console.log(params);
-      this.id = params.row;
+      if(params.row!='new'){this.id = params.row;
       // In a real app: dispatch action to load the details here.
       console.log(this._api.getFeed(params.row).then((params) => { this.setFeed(params); console.log(params) }));
+      }else this.isNew= true;
     });
     //this._api.getFeed(this.id).then((params)=>{console.log(params);return params}) 
   }
@@ -33,6 +35,17 @@ export class FeedComponent implements OnInit {
   editFeed(row: any) {
 
     this._api.updateFeed(row).then((res) => {
+
+
+      alert(`Message: ${res.message}`)
+      this._route.navigate(['']);
+
+    });
+  }
+
+  newFeed(row: any) {
+
+    this._api.newFeed(row).then((res) => {
 
 
       alert(`Message: ${res.message}`)

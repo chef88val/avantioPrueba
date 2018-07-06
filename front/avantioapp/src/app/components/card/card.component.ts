@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
 import { ApiServeService } from '../../services/api-serve.service';
+import _ = require('lodash');
 
 @Component({
   selector: 'app-card',
@@ -14,11 +15,13 @@ export class CardComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.publisher = this._api.getPublishers();
-    if (Object(this.item).keys != undefined) this.isItem = true;
+    //if (Object(this.item).keys != undefined) this.isItem = true;
     console.log("CARD", this.item, Object(this.item).keys == undefined)
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes.item)
+    if(_.findKey( changes.item,'_id'))this.isItem = true;
     //throw new Error("Method not implemented.");
   }
 
