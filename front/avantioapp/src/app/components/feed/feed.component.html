@@ -51,11 +51,15 @@
     </div>
 
     <!--<button [disabled]="!feedForm.form.valid" type="submit" class="btn btn-success">Save</button>-->
-    <button class="btn btn-info" (click)="editFeed(feed)">
-      <i class="fa fa-edit fa-2x"></i>
+    <button *ngIf="!isNew"class="btn btn-block btn-info" (click)="editFeed(feed)">
+        SAVE
     </button>
-    <button class="btn btn-danger" (click)="deleteFeed(feed)">
-      <i class="fa fa-plus fa-2x"></i>
+    <button *ngIf="!isNew"class="btn btn-block btn-danger" (click)="deleteFeed(feed)">
+      DELETE
+    </button>
+
+    <button *ngIf="isNew"class="btn btn-block btn-success" (click)="newFeed(feed)">
+      NEW
     </button>
 
   </form>

@@ -17,9 +17,17 @@
       <img width="30" height="30" src="../assets/elpais.png" alt="">
     </span>
     <div class="card-body">
-      <h5 class="card-title">{{item.publisher}}Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <span><i>{{item.pubDate | date}}</i></span>
+      <h2 class="card-title">{{item.title}} </h2>
+      <p class="card-text" [innerHTML]="item.body"></p>
+      <p class="card-subtitle mb-2 text-muted"><b>  Author:</b>{{item.author}}</p>
+      <a href="" [href]="item.source" class="btn btn-primary">
+        <span *ngIf="item.publisher==publisher.elmundo">
+          <img width="30" height="30" src="../assets/elmundo.png" alt="">
+        </span>
+        <span *ngIf="item.publisher==publisher.elpais">
+          <img width="30" height="30" src="../assets/elpais.png" alt="">
+        </span>  Go Feed</a>
     </div>
   </div>
 </div>

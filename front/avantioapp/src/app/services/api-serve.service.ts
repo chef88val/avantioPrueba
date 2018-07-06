@@ -62,6 +62,15 @@ export class ApiServeService {
   getHeaders() { return this.headers }
   getPublishers() { return this.publishers }
 
+  newFeed(row) {
+    let response = this._Restangular.one('feed', row._id).customPOST(JSON.stringify(row), null, null, { 'Content-Type': undefined })
+    return response.toPromise().then((err, success) => {
+      return err;
+      /*if(err) return {status:false, value:err};
+      else return {status:true, value:success};*/
+    });
+  }
+
   updateFeed(row) {
     let response = this._Restangular.one('feed', row._id).customPUT(JSON.stringify(row), null, null, { 'Content-Type': undefined })
     return response.toPromise().then((err, success) => {
