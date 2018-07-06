@@ -12,7 +12,8 @@ var feedSchema =  Schema({
     publisher: String,
     author: String,
     status: String,
-    pubDate: Date
+    pubDate: Date,
+    visible: Boolean
 })
 
 

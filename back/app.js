@@ -54,12 +54,13 @@ function home(publisher) {
                 feed.body = item.content || item['content:encoded'];
                 feed.source = item.link;
                 feed.author = item.creator;
+                feed.visible= true;
                 if(item.enclosure)
                 feed.image = item.enclosure.url;
                 else
                 feed.image = null;
                 Feed.updateMany({
-                    title: item.title
+                    title: item.title, visible: true
                 }, feed, {
                     upsert: true
                 }, (err, suc) => {
