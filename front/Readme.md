@@ -1,13 +1,11 @@
 # AvantioApp - Dailytrends
-
-[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
+ 
 
 Se ha creado este repositorio para la prueba técnica en la empresa Avantio.
 
   # Importante:
   `Los feeds de los diarios se actualizan cada vez que se lanza el servidor. Y cada cierto tiempo`
-
-Hay 2 unicas carpetas en este proyecto:
+ 
 
 ### Front
 Esta carpeta tiene el código de la aplicación Web hecha con la última versión de Angular, concretamente la 6.0.3.
