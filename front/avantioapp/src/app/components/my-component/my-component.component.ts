@@ -3,7 +3,7 @@ import { NgxPopupComponent } from 'ngx-popups';
 
 
 @Component({
-  selector: 'my-component',
+  selector: 'app-my-component',
   template: `
     <div (click)="popup.close()">close</div>
     <p>Message : {{ message }}</p>

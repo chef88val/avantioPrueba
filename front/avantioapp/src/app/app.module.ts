@@ -35,7 +35,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 // Function for setting the default restangular configuration
 export function RestangularConfigFactory(RestangularProvider) {
   RestangularProvider.setBaseUrl('http://127.0.0.1:3800/api/');
-  //RestangularProvider.setDefaultHeaders({'Authorization': 'Bearer UDXPx-Xko0w4BRKajozCVy20X11MRZs1'});
+  // RestangularProvider.setDefaultHeaders({'Authorization': 'Bearer UDXPx-Xko0w4BRKajozCVy20X11MRZs1'});
 }
 @NgModule({
   declarations: [

@@ -10,60 +10,58 @@ import { puts } from 'util';
 })
 export class ApiServeService {
   headers: any = [
-    { "id": "title", "value": "Title" },
-    { "id": "Body", "value": "Content" },
-    { "id": "Source", "value": "Link" },
-    { "id": "Publisher", "value": "Publisher" },
-    { "id": "pubDate", "value": "Last updated" },
-    { "id": "author", "value": "Author" }
+    { 'id': 'title', 'value': 'Title' },
+    { 'id': 'Body', 'value': 'Content' },
+    { 'id': 'Source', 'value': 'Link' },
+    { 'id': 'Publisher', 'value': 'Publisher' },
+    { 'id': 'pubDate', 'value': 'Last updated' },
+    { 'id': 'author', 'value': 'Author' }
   ];
   publishers = {
     elpais: 'elPais',
     elmundo: 'elMundo'
   };
   constructor(private _Restangular: Restangular, private http: HttpClient) { }
-  private rssToJsonServiceBaseUrl: string = 'https://rss2json.com/api.json?rss_url=';
+  private rssToJsonServiceBaseUrl: String = 'https://rss2json.com/api.json?rss_url=';
 
   getFeeds(page?: Number) {
-    if (page == null) page = 1
+    if (page == null) { page = 1; }
 
-    //return this.http.get(this.rssToJsonServiceBaseUrl + 'https://elpais.com')
-    let response = this._Restangular.one('feeds', page).get();
+    // return this.http.get(this.rssToJsonServiceBaseUrl + 'https://elpais.com')
+    const response = this._Restangular.one('feeds', page).get();
 
     return response.toPromise().then((feeds) => {
-
-      console.log('feeds' + feeds.toString())
       return feeds;
-    })
+    });
   }
 
   getFeed(id: String) {
 
 
-    //return this.http.get(this.rssToJsonServiceBaseUrl + 'https://elpais.com')
-    let response = this._Restangular.one('feed', id).get();
+    // return this.http.get(this.rssToJsonServiceBaseUrl + 'https://elpais.com')
+    const response = this._Restangular.one('feed', id).get();
 
     return response.toPromise().then((feed) => {
 
-      console.log(feed)
+      console.log(feed);
       return feed;
-    })
+    });
   }
   getPublisherList() {
-    let response = this._Restangular.one('publishers').get();
+    const response = this._Restangular.one('publishers').get();
 
     return response.toPromise().then((publisher) => {
 
-      console.log('publisher' + publisher)
+      console.log('publisher' + publisher);
       this.publishers = publisher;
-    })
+    });
   }
 
-  getHeaders() { return this.headers }
-  getPublishers() { return this.publishers }
+  getHeaders() { return this.headers; }
+  getPublishers() { return this.publishers; }
 
   newFeed(row) {
-    let response = this._Restangular.one('feed', row._id).customPOST(JSON.stringify(row), null, null, { 'Content-Type': undefined })
+    const response = this._Restangular.one('feed', row._id).customPOST(JSON.stringify(row), null, null, { 'Content-Type': undefined });
     return response.toPromise().then((err, success) => {
       return err;
       /*if(err) return {status:false, value:err};
@@ -72,7 +70,7 @@ export class ApiServeService {
   }
 
   updateFeed(row) {
-    let response = this._Restangular.one('feed', row._id).customPUT(JSON.stringify(row), null, null, { 'Content-Type': undefined })
+    const response = this._Restangular.one('feed', row._id).customPUT(JSON.stringify(row), null, null, { 'Content-Type': undefined });
     return response.toPromise().then((err, success) => {
       return err;
       /*if(err) return {status:false, value:err};
@@ -81,7 +79,7 @@ export class ApiServeService {
   }
 
   deleteFeed(row) {
-    let response = this._Restangular.one('feed', row._id).remove()
+    const response = this._Restangular.one('feed', row._id).remove();
     return response.toPromise().then((err, success) => {
       return err;
       /*if(err) return {status:false, value:err};

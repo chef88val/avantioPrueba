@@ -1,5 +1,5 @@
 import { Component, OnInit, ComponentRef } from '@angular/core';
-import { Route, Router } from "@angular/router";
+import { Route, Router } from '@angular/router';
 import { ApiServeService } from '../../services/api-serve.service';
 
 import { Modal } from 'ngx-modialog/plugins/bootstrap';
@@ -13,7 +13,7 @@ import { MyComponent } from '../my-component/my-component.component';
 /*
 class MyModalComponent implements IModalDialog {
   actionButtons: IModalDialogButton[];
- 
+
   constructor() {
     this.actionButtons = [
       { text: 'Close' }, // no special processing here
@@ -21,7 +21,7 @@ class MyModalComponent implements IModalDialog {
       { text: 'I never close', onAction: () => false }
     ];
   }
- 
+
   dialogInit(reference: ComponentRef<IModalDialog>, options: Partial<IModalDialogOptions<any>>) {
     // no processing needed
   }
@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.getData(this.nav.page);
     this.publisher = this._api.getPublishers();
-    console.log(this.publisher.elpais)
+    console.log(this.publisher.elpais);
   }
   getData(page?: number) {
     this._api.getFeeds(page).then((feeds) => {
@@ -45,20 +45,20 @@ export class HomeComponent implements OnInit {
       this.nav.itemspage = feeds.itemspage;
       this.nav.total = feeds.feedstotal;
       this.nav.pages = feeds.pages;
-      this.data = feeds.feeds
+      this.data = feeds.feeds;
     });
   }
 
   selectItem(i) {
-    this.itemSelected = i
-    console.log(i)
+    this.itemSelected = i;
+    console.log(i);
   }
 
   first() {
     this.nav.page = 1;
     this._api.getFeeds(this.nav.page).then((feeds) => {
       console.log('feeds' + feeds);
-      this.data = feeds.feeds
+      this.data = feeds.feeds;
     });
   }
 
@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit {
     this.nav.page--;
     this._api.getFeeds(this.nav.page).then((feeds) => {
       console.log('feeds' + feeds);
-      this.data = feeds.feeds
+      this.data = feeds.feeds;
     });
   }
 
@@ -74,7 +74,7 @@ export class HomeComponent implements OnInit {
     this.nav.page++;
     this._api.getFeeds(this.nav.page).then((feeds) => {
       console.log('feeds' + feeds);
-      this.data = feeds.feeds
+      this.data = feeds.feeds;
     });
   }
 
@@ -82,12 +82,12 @@ export class HomeComponent implements OnInit {
     this.nav.page = this.nav.pages;
     this._api.getFeeds(this.nav.page).then((feeds) => {
       console.log('feeds' + feeds);
-      this.data = feeds.feeds
+      this.data = feeds.feeds;
     });
   }
 
   newFeed() {
-    //modal
+    // modal
 
   }
 
@@ -95,7 +95,7 @@ export class HomeComponent implements OnInit {
     this._route.navigate(['feed', row]);
     /*this._api.updateFeed(row).then((res) => {
       this.getData(this.nav.page);
- 
+
       alert(`Message: ${res.message}`)
 
     });;*/

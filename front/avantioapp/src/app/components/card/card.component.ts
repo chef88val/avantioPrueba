@@ -15,14 +15,12 @@ export class CardComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.publisher = this._api.getPublishers();
-    //if (Object(this.item).keys != undefined) this.isItem = true;
-    console.log("CARD", this.item, Object(this.item).keys == undefined)
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes.item)
-    if (_.findKey(changes.item, '_id')) this.isItem = true;
-    //throw new Error("Method not implemented.");
+    console.log(changes.item);
+    if (_.findKey(changes.item, '_id')) { this.isItem = true; }
+    // throw new Error("Method not implemented.");
   }
 
 }

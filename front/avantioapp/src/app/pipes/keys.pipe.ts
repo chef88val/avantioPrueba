@@ -9,7 +9,6 @@ export class KeysPipe implements PipeTransform {
     if (!value) {
       return null;
     }
-    console.log(Object.keys(value))
     return Object.keys(value);
   }
 }

@@ -12,8 +12,10 @@ describe('ApiServeService', () => {
     });
   });
 
-  //it('should be created', inject([Restangular,ApiServeService], ( _Restangular:Restangular, service: ApiServeService) => {
-  it('should be created', inject([Restangular, HttpTestingController, ApiServeService], (_RestangularHttp: Restangular, _HttpTestingController: HttpTestingController, service: ApiServeService) => {
+  // it('should be created', inject([Restangular,ApiServeService], ( _Restangular:Restangular, service: ApiServeService) => {
+  it('should be created',
+  inject([Restangular, HttpTestingController, ApiServeService],
+    (_RestangularHttp: Restangular, _HttpTestingController: HttpTestingController, service: ApiServeService) => {
     expect(service).toBeTruthy();
   }));
 });

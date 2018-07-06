@@ -12,24 +12,23 @@ export class FeedComponent implements OnInit {
   private feed: any = {};
   private id: String;
   private isNew: Boolean = false;
+  private submitted: Boolean = false;
   constructor(private route: ActivatedRoute, private _route: Router, private _api: ApiServeService) { }
   ngOnInit() {
     this.route.params.subscribe(params => {
       // (+) converts string 'id' to a number
       console.log(params);
-      if (params.row != 'new') {
+      if (params.row !== 'new') {
       this.id = params.row;
         // In a real app: dispatch action to load the details here.
-        console.log(this._api.getFeed(params.row).then((params) => { this.setFeed(params); console.log(params) }));
-      } else this.isNew = true;
+        console.log(this._api.getFeed(params.row).then((value) => {if (value) { this.setFeed(value); } }));
+      } else { this.isNew = true; }
     });
-    //this._api.getFeed(this.id).then((params)=>{console.log(params);return params}) 
+    // this._api.getFeed(this.id).then((params)=>{console.log(params);return params})
   }
   setFeed(data) {
     this.feed = data;
   }
-
-  submitted = false;
 
   onSubmit() { this.submitted = true; }
 
@@ -38,7 +37,7 @@ export class FeedComponent implements OnInit {
     this._api.updateFeed(row).then((res) => {
 
 
-      alert(`Message: ${res.message}`)
+      alert(`Message: ${res.message}`);
       this._route.navigate(['']);
 
     });
@@ -49,7 +48,7 @@ export class FeedComponent implements OnInit {
     this._api.newFeed(row).then((res) => {
 
 
-      alert(`Message: ${res.message}`)
+      alert(`Message: ${res.message}`);
       this._route.navigate(['']);
 
     });
@@ -63,7 +62,7 @@ export class FeedComponent implements OnInit {
       alert(`Message: ${res.message}`);
       this._route.navigate(['']);
 
-    });;
+    });
   }
 
 }
